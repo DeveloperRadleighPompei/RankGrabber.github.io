@@ -1,0 +1,28 @@
+name: Python Workflow
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '*/1 * * * *' # Runs every minute
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11' # Choose your Python version
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt # If you have dependencies
+
+    - name: Run Python script
+      run: python main.py
